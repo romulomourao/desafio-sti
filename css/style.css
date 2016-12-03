@@ -1,0 +1,269 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #CFD8DC;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    background-color: #455A64;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: block;
+    height: 0;
+    background-color: transparent;
+}
+
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 20px;
+    background-color: #f39c12;
+    -webkit-border-radius: 8px;
+}
+
+
+#container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    top: 30px;
+    text-align: center;
+}
+
+nav {
+    height: 100px;
+    background-color: #448AFF;
+    margin: auto;
+}
+
+ul,
+ol {
+    list-style: none;
+    text-align: center;
+    margin: 0 auto;
+}
+
+nav ul {
+    padding: 30px 200px;
+}
+
+li {
+    display: inline-block;
+    padding: 10px;
+    width: 90%;
+    height: 38px;
+    margin-top: 10px;
+    border: 1px solid #808080;
+    transition: background-color .5s ease;
+    */
+}
+
+section {
+    width: 600px;
+    padding: 40px 0;
+    margin: auto
+}
+
+a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+figure {
+    text-align: center;
+}
+
+img {
+    width: 300px;
+}
+
+p {
+    padding: 20px 0;
+    line-height: 25px;
+}
+
+footer {
+    width: auto;
+    height: 60px;
+    background-color: #448AFF;
+}
+
+i {
+    font-size: 3em;
+ 
+    color: #white;
+    -webkit-transition: color 0.5s ease;
+    -moz-transition: color 0.5s ease;
+    -o-transition: color 0.5s ease;
+    transition: color 0.5s eas;
+}
+
+
+h1 {
+    padding: 20px;
+}
+
+input {
+    color: #455A64;
+    font-weight: 700;
+    border: none;
+    width: 50%;
+    height: 40px;
+    padding-left: 10px;
+}
+
+button {
+    font-weight: 700;
+    height: 40px;
+    width: 50px;
+    background-color: #1976D2;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    transition: background-color .5s ease;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #4CAF50;
+}
+
+.bt-options:hover {
+    cursor: pointer;
+}
+
+span {
+    display: block;
+}
+
+.bt-options {
+    float: left;
+    width: 10%;
+    height: 38px;
+    line-height: 38px;
+    position: relative;
+    top: 0;
+}
+
+footer {
+    padding-top: 30px;
+    background-color: #f39c12;
+    height: 50px;
+    margin: 20px 0;
+}
+
+.bt-edit {
+    background-color: #4CAF50;
+}
+
+.bt-remove {
+    background-color: #F44336;
+}
+
+.bt-remove:before {
+    content: 'x';
+}
+
+.bt-edit:before {
+    content: "edit";
+}
+
+.lista-texto {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 80%;
+    height: 38px;
+    background-color: #448AFF;
+    line-height: 38px;
+}
+
+#map_wrapper {
+    display: flex;
+    padding: 50px 0;
+    height: 500px;
+    margin-bottom: 200px;
+}
+
+#side {
+    align-items: center;
+    width: 50%;
+    height: 500px;
+}
+
+#map {
+    width: 50%;
+    height: 500px;
+}
+
+.title {
+    background-color: #f47d35;
+    color: white;
+}
+
+#near-stations {
+    margin-top: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 300px;
+}
+
+#nearest{      
+    margin-top: 20px;
+    display: flex;
+   align-items: center;
+    height: 80px;
+    width: 100%;
+    color: white;
+}
+
+.fifty{
+    width: 50%;
+}
+
+.sixty{
+    width: 60%;
+}
+    
+.forty{
+    width: 40%;
+}
+
+.eighty{
+    width: 80%;
+    text-align: left;
+}
+
+.twenty{
+    width: 20%;
+}
+
+#nearest div h3, #nearest div p{
+
+    color:white;
+ 
+}
+
+#nearest i{
+    
+    font-size: 3rem;
+    color: white;
+}
+
