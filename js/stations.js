@@ -41,7 +41,7 @@ var App = {
                 var $items = [];            
                 var $marker = [];
                 var $icon = {
-                    url: '../img/bike.png', // url
+                    url: 'http://rmourao.com.br/desafio-sti/img/bike.png', // url
                     scaledSize: new google.maps.Size(30, 30), // scaled size
                     origin: new google.maps.Point(0,0), // origin
                     anchor: new google.maps.Point(0, 0) // anchor
@@ -125,7 +125,7 @@ var App = {
 };
 $(document).ready(function() {
    
-  //  $("#map_wrapper").hide();
+  $("#map_wrapper").hide();
     
     window.onkeypress = function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
