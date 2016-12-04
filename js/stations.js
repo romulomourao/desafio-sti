@@ -5,7 +5,7 @@ var App = {
     stationsDistance: [],
     map: {},
     calcDistance: function(lat1, lon1, lat2, lon2) {
-        
+
         var R = 6371; // km
         var dLat = App.toRad(lat2 - lat1);
         var dLon = App.toRad(lon2 - lon1);
@@ -18,11 +18,11 @@ var App = {
         var d = R * c;
         return d.toFixed(2);
     },
-    
+
     toRad: function toRad(Value) {
         return Value * Math.PI / 180;
     },
-    
+
     template: function($id, $Name, $lat, $lon) {
         $distance = App.calcDistance(App.userLocation.lat, App.userLocation.lon, $lat, $lon);
         App.stationsDistance.push({name: $Name, km: Number($distance), lat: $lat, lon: $lon});
@@ -31,14 +31,14 @@ var App = {
     },
     apply_stations: function() {
         $("main#main menu article").empty();
-        //        var markers = new OpenLayers.Layer.Markers("Markers");
+
         $.ajax({
             url: 'http://dadosabertos.rio.rj.gov.br/apiTransporte/apresentacao/rest/index.cfm/estacoesBikeRio',
             dataType: 'json',
             success: function($response) {
                 App.stations = $response.DATA;
                 //console.log($response);
-                var $items = [];            
+                var $items = [];
                 var $marker = [];
                 var $icon = {
                     url: 'http://rmourao.com.br/desafio-sti/img/bike.png', // url
@@ -48,10 +48,10 @@ var App = {
                 };
 
                 $.each(App.stations, function($key, $station) {
-                    $station.name = $station[1];     
+                    $station.name = $station[1];
                     $station.lat = $station[5];
-                    $station.lon = $station[6];                                                                    
-                    
+                    $station.lon = $station[6];
+
                     $marker[$key] = new google.maps.Marker({
                         position: new google.maps.LatLng($station.lat, $station.lon),
                         map: App.map,
@@ -64,11 +64,11 @@ var App = {
                         });
                         infowindow.open(App.map, $marker[$key]);
                     });
-                    
+
                     $items.push(App.template($key, $station.name, $station.lat, $station.lon));
-                    
+
                 });
-                
+
                 //Função para ordenar as distancias
                 function dynamicSort(property) {
                     var sortOrder = 1;
@@ -78,24 +78,24 @@ var App = {
                     }
                     return function (a,b) {
                         var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-                        
+
                         return result * sortOrder;
                     }
                 }
                 App.stationsDistance = App.stationsDistance.sort(dynamicSort("km"));
-                
+
                 $(".stations-list").empty();
                 $("<ul/>", {
-                    class: 'stations-list',                    
+                    class: 'stations-list',
                     html: $items.join("")
                 }).appendTo("#near-stations");
-           
+
                 $("#local").text("Estação "+App.stationsDistance[0].name+" está a "+App.stationsDistance[0].km+" Km do seu local");
-                
-                
+
+
                 var line = new google.maps.Polyline({
                     path: [
-                        new google.maps.LatLng(App.userLocation.lat, App.userLocation.lon), 
+                        new google.maps.LatLng(App.userLocation.lat, App.userLocation.lon),
                         new google.maps.LatLng(App.stationsDistance[0].lat, App.stationsDistance[0].lon)
                     ],
                     strokeColor: "#FF0000",
@@ -103,14 +103,14 @@ var App = {
                     strokeWeight: 2,
                     map: App.map
                 });
-                
+
                 App.stationsDistance = [];
                 App.userLocation = {};
             }
         });
     },
     init: function(coords) {
-    
+
         App.map = new google.maps.Map(document.getElementById("map"), {
             center: new google.maps.LatLng(coords.lat,coords.lon),
             mapTypeId: 'roadmap',
@@ -118,7 +118,7 @@ var App = {
         });
         App.userLocation = coords;
         App.apply_stations();
-        
+
         new google.maps.Marker({
             position: new google.maps.LatLng(coords.lat, coords.lon),
             map: App.map,
@@ -127,9 +127,9 @@ var App = {
     }
 };
 $(document).ready(function() {
-   
-  $("#map_wrapper").hide();
-    
+
+  //("#map_wrapper").hide();
+
     window.onkeypress = function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
         if (code === 13) {
@@ -138,24 +138,24 @@ $(document).ready(function() {
                 $('#rua').val("");
                 $rua = $rua.replace(" ", "+");
                 searchStreet($rua);
-              
-                
+
+
             }
 
         }
     };
-    
+
     function searchStreet($rua){
         $.ajax({
 
-            url: 'http://nominatim.openstreetmap.org/search?q='+$rua+'&format=json',
+            url: 'http://nominatim.openstreetmap.org/search?street='+$rua+'&city=rio+de+janeiro&format=json',
             // url: 'http://api.postmon.com.br/v1/cep/'+cep,
 
             success:function(data){
-                var userCoords = {"lat": data[0].lat, "lon": data[0].lon};            
-                App.init(userCoords); 
-                $("#map_wrapper").show();
-                
+                var userCoords = {"lat": data[0].lat, "lon": data[0].lon};
+                App.init(userCoords);
+                $("#map_wrapper").css({"visibility" : "visible"});
+
 
             },
             error:function(){
@@ -164,9 +164,7 @@ $(document).ready(function() {
         });
 
     }
-    
-   
-            
+
+
+
 });
-       
-        
