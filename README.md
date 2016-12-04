@@ -34,6 +34,18 @@
 
 ## Desafio 2 - BikeRio
 
+![Snapshot](screenshots/06.png)
+
 * [Código-Fonte](https://github.com/romulomourao/desafio-sti/tree/gh-pages)
 
 * [Aplicação Rodando](http://rmourao.com.br/desafio-sti)
+
+**OBS: Só funciona para a cidade do Rio de Janeiro**
+
+- Você só precisa digitar o nome da rua e dar ENTER, apenas o nome da rua sem complementos. Ex: Avenida Rio Branco
+
+- O mapa mostrará um marcador vermelho que indicará sua posição e vários marcadores amarelos representando as estações. Uma linha vermelha será traçada indicando a estação mais próxima.
+
+- Ao lado do mapa será mostrado a distancia e o nome da estação mais próxima e uma lista ordenada das estações mais próximas.
+
+![Snapshot](screenshots/07.png)
