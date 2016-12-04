@@ -25,7 +25,7 @@ var App = {
     
     template: function($id, $Name, $lat, $lon) {
         $distance = App.calcDistance(App.userLocation.lat, App.userLocation.lon, $lat, $lon);
-        App.stationsDistance.push({name: $Name, km: $distance, lat: $lat, lon: $lon});
+        App.stationsDistance.push({name: $Name, km: Number($distance), lat: $lat, lon: $lon});
         return '<li data-id_station="' + $id + '" data-id_element="$element" class="item item-button-right">\
 ' + $Name + ' - '+$distance +'Km</li>';
     },
@@ -78,10 +78,10 @@ var App = {
                     }
                     return function (a,b) {
                         var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+                        
                         return result * sortOrder;
                     }
                 }
-                
                 App.stationsDistance = App.stationsDistance.sort(dynamicSort("km"));
                 
                 $(".stations-list").empty();
@@ -103,6 +103,9 @@ var App = {
                     strokeWeight: 2,
                     map: App.map
                 });
+                
+                App.stationsDistance = [];
+                App.userLocation = {};
             }
         });
     },
@@ -132,6 +135,7 @@ $(document).ready(function() {
         if (code === 13) {
             if(document.getElementById('rua').value !== ""){
                 var $rua  = document.getElementById('rua').value;
+                $('#rua').val("");
                 $rua = $rua.replace(" ", "+");
                 searchStreet($rua);
               
