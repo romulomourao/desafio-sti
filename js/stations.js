@@ -1,9 +1,9 @@
 var App = {
     stations: {},
-    geolocation: {},
     userLocation: {},
     stationsDistance: [],
     map: {},
+    //Função para calcular a distancia entre duas coordenadas
     calcDistance: function (lat1, lon1, lat2, lon2) {
 
         var R = 6371; // km
@@ -18,12 +18,12 @@ var App = {
         var d = R * c;
         return d.toFixed(2);
     },
-
+    //Funcção para trasformar um coordenada em radianos
     toRad: function toRad(Value) {
         return Value * Math.PI / 180;
     },
 
-    template: function ($id, $Name, $lat, $lon) {
+    addStation: function ($id, $Name, $lat, $lon) {
         $distance = App.calcDistance(App.userLocation.lat, App.userLocation.lon, $lat, $lon);
         App.stationsDistance.push({
             name: $Name,
@@ -31,11 +31,9 @@ var App = {
             lat: $lat,
             lon: $lon
         });
-        return '<li data-id_station="' + $id + '" data-id_element="$element" class="item item-button-right">\
-' + $Name + ' - ' + $distance + 'Km</li>';
+        
     },
     apply_stations: function () {
-        $("main#main menu article").empty();
 
         $.ajax({
             url: 'http://dadosabertos.rio.rj.gov.br/apiTransporte/apresentacao/rest/index.cfm/estacoesBikeRio',
@@ -70,7 +68,7 @@ var App = {
                         infowindow.open(App.map, $marker[$key]);
                     });
 
-                    $items.push(App.template($key, $station.name, $station.lat, $station.lon));
+                    App.addStation($key, $station.name, $station.lat, $station.lon);
 
                 });
 
@@ -88,6 +86,10 @@ var App = {
                     }
                 }
                 App.stationsDistance = App.stationsDistance.sort(dynamicSort("km"));
+                App.stationsDistance.forEach(function(item,index){
+                    $items.push('<li>' + item.name + ' - ' + item.km + 'Km</li>');
+                });
+                
 
                 $(".stations-list").empty();
                 $("<ul/>", {
@@ -97,7 +99,7 @@ var App = {
 
                 $("#local").text("Estação " + App.stationsDistance[0].name + " está a " + App.stationsDistance[0].km + " Km do seu local");
 
-
+                //Linha vermelha no mapa entre o local e a estação mais próxima
                 var line = new google.maps.Polyline({
                     path: [
                         new google.maps.LatLng(App.userLocation.lat, App.userLocation.lon),
@@ -112,7 +114,7 @@ var App = {
                 App.stationsDistance = [];
                 App.userLocation = {};
             }
-        });
+        });//FIM DO AJAX
     },
     init: function (coords) {
 
@@ -133,8 +135,6 @@ var App = {
 };
 $(document).ready(function () {
 
-    //("#map_wrapper").hide();
-
     window.onkeypress = function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
         if (code === 13) {
@@ -154,7 +154,6 @@ $(document).ready(function () {
         $.ajax({
 
             url: 'http://nominatim.openstreetmap.org/search?street=' + $rua + '&city=rio+de+janeiro&format=json',
-            // url: 'http://api.postmon.com.br/v1/cep/'+cep,
 
             success: function (data) {
                 if (data.length > 0) {
