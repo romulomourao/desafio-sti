@@ -5,7 +5,7 @@
 
 ## Desafio 1 - UFFMail
 
-* [Código-Fonte](https://github.com/romulomourao/desafio-sti/DesafioSTI-CSV)
+* [Código-Fonte](https://github.com/romulomourao/desafio-sti/tree/master/DesafioSTI-CSV)
 - Escolha o arquivo com as informações.
 
 ![Snapshot](screenshots/01.png)
@@ -36,4 +36,4 @@
 
 * [Código-Fonte](https://github.com/romulomourao/desafio-sti/tree/gh-pages)
 
-* [Aplicação Rodando](https://rmourao.com.br/desafio-sti)
+* [Aplicação Rodando](http://rmourao.com.br/desafio-sti)
